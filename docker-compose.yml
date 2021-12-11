@@ -4,18 +4,18 @@ volumes:
   cnc-config:
 
 services:
-  # cncjs:
-  #   build: ./cncjs
-  #   # Add additional devices to this list if required.
-  #   devices:
-  #     - "/dev/ttyAMA0:/dev/ttyAMA0"
-  #     - "/dev/ttyUSB0:/dev/ttyUSB0"
-  #   cap_add:
-  #     - SYS_RAWIO
-  #   expose:
-  #     - "8000"
-  #   volumes:
-  #     - "cnc-config:/config"
+  cncjs:
+    build: ./cncjs
+    # Add additional devices to this list if required.
+    devices:
+      - "/dev/ttyAMA0:/dev/ttyAMA0"
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    cap_add:
+      - SYS_RAWIO
+    expose:
+      - "8000"
+    volumes:
+      - "cnc-config:/config"
 
   # mjpg-streamer:
   #   build: ./mjpg-streamer
@@ -25,8 +25,8 @@ services:
 
   code-server:
     build: ./code-server
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
 
   # g2core: 
   #   build: ./g2core

@@ -1,16 +1,11 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-buster as build
- 
-RUN install_packages build-essential git-core make imagemagick libv4l-dev libjpeg-dev cmake git  curl
-
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-buster
-
-COPY --from=build /usr/local /usr/local
-
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:14.18-sid
+RUN install_packages build-essential git-core make imagemagick libv4l-dev libjpeg-dev cmake git  curl python3 pkg-config 
+RUN npm config set python python3
+RUN yarn global add code-server
+RUN git clone https://github.com/synthetos/g2.git /g2core
+WORKDIR /g2core/
+RUN git submodule init && git submodule update
+VOLUME [ ".local/" ]
 EXPOSE 8080
-
-RUN mkdir /config
-
 CMD code-server
 
