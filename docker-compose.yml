@@ -4,47 +4,55 @@ volumes:
   cnc-config:
 
 services:
-  cncjs:
-    build: ./cncjs
-    # Add additional devices to this list if required.
-    devices:
-      - "/dev/ttyAMA0:/dev/ttyAMA0"
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
-    cap_add:
-      - SYS_RAWIO
-    expose:
-      - "8000"
-    volumes:
-      - "cnc-config:/config"
+  # cncjs:
+  #   build: ./cncjs
+  #   # Add additional devices to this list if required.
+  #   devices:
+  #     - "/dev/ttyAMA0:/dev/ttyAMA0"
+  #     - "/dev/ttyUSB0:/dev/ttyUSB0"
+  #   cap_add:
+  #     - SYS_RAWIO
+  #   expose:
+  #     - "8000"
+  #   volumes:
+  #     - "cnc-config:/config"
 
-  mjpg-streamer:
-    build: ./mjpg-streamer
-    privileged: true
-    expose:
-      - "8080"
+  # mjpg-streamer:
+  #   build: ./mjpg-streamer
+  #   privileged: true
+  #   expose:
+  #     - "8080"
 
-  proxy:
-    build: ./proxy
-    depends_on:
-      - cncjs
+  code-server:
+    build: ./code-server
     ports:
-      - "80:80"
+      - "8080:8080"
 
-  mdns:
-    build: ./mdns
-    network_mode: host
-    depends_on:
-      - proxy
-    cap_add:
-      - SYS_RESOURCE
-      - SYS_ADMIN
-    security_opt:
-      - "apparmor:unconfined"
-    tmpfs:
-      - /run
-      - /sys/fs/cgroup
-    labels:
-      io.balena.features.dbus: "1"
-      io.balena.features.supervisor-api: "1"
-    environment:
-      MDNS_TLD: local
+  # g2core: 
+  #   build: ./g2core
+    
+  # proxy:
+  #   build: ./proxy
+  #   depends_on:
+  #     - cncjs
+  #   ports:
+  #     - "80:80"
+
+  # mdns:
+  #   build: ./mdns
+  #   network_mode: host
+  #   depends_on:
+  #     - proxy
+  #   cap_add:
+  #     - SYS_RESOURCE
+  #     - SYS_ADMIN
+  #   security_opt:
+  #     - "apparmor:unconfined"
+  #   tmpfs:
+  #     - /run
+  #     - /sys/fs/cgroup
+  #   labels:
+  #     io.balena.features.dbus: "1"
+  #     io.balena.features.supervisor-api: "1"
+  #   environment:
+  #     MDNS_TLD: local
