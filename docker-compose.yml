@@ -23,10 +23,10 @@ services:
   #   expose:
   #     - "8080"
 
-  code-server:
-    build: ./code-server
-    expose:
-      - "8080"
+  #code-server:
+  #  build: ./code-server
+   # expose:
+  #    - "8080"
 
   # g2core: 
   #   build: ./g2core
