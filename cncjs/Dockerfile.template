@@ -1,7 +1,7 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-buster-build as build
-RUN  apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:11-bullseye-build as build
+#RUN  apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
 RUN  apt-get install -y build-essential git 
-RUN  apt-get install htop iotop nmon lsof screen -y
+#RUN  apt-get install htop iotop nmon lsof screen -y
 RUN  curl -sSL https://raw.githubusercontent.com/cncjs/cncjs-pi-raspbian/master/cncjs_install.sh | bash
 #RUN curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - 
 #RUN apt-get install -y nodejs  # npm nodejs-legacy #(Installed with nodesource)
@@ -9,7 +9,7 @@ RUN  curl -sSL https://raw.githubusercontent.com/cncjs/cncjs-pi-raspbian/master/
 #RUN npm install -g cncjs@latest --unsafe-perm
 #RUN npm install -g pm2
 
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-buster
+#FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-buster
 
 #COPY --from=build /usr/local /usr/local
 
