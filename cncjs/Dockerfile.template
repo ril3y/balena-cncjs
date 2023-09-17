@@ -9,12 +9,12 @@ RUN  curl -sSL https://raw.githubusercontent.com/cncjs/cncjs-pi-raspbian/master/
 #RUN npm install -g cncjs@latest --unsafe-perm
 #RUN npm install -g pm2
 
-#FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-buster
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:11-bullseye
 
 #COPY --from=build /usr/local /usr/local
 
 EXPOSE 8000
 
 RUN mkdir /config
-
+CMD /bin/bash
 #CMD /usr/local/bin/cncjs -H 0.0.0.0 -p 8000 -c /config/cncrc
