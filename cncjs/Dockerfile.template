@@ -4,10 +4,17 @@ RUN  apt-get install -y build-essential git
 #RUN  apt-get install htop iotop nmon lsof screen -y
 #RUN  curl -sSL https://raw.githubusercontent.com/cncjs/cncjs-pi-raspbian/master/cncjs_install.sh | bash
 #RUN curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - 
-RUN apt-get install -y nodejs 
+RUN apt install i2c-tools
+RUN git clone https://github.com/creationix/nvm.git ~/.nvm
+WORKDIR  ~/.nvm
+RUN git checkout `git describe --abbrev=0 --tags`
+WORKDIR  ~/
+RUN . ~/.nvm/nvm.sh
+RUN export NVM_DIR="$HOME/.nvm"[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"s 
 #RUN npm install npm@latest -g
-RUN npm install -g cncjs@latest --unsafe-perm
 #RUN npm install -g pm2
+RUN nvm install 4 && nvm use 4
+RUN npm install -g cncjs@latest --unsafe-perm
 
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:11-bullseye
 
