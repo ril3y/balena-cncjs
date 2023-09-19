@@ -1,7 +1,5 @@
 #FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-bullseye-build as build
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:10-bullseye
-
-
 RUN  apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
 RUN  install_packages build-essential git python3 wget i2c-tools
 RUN npm install cncjs@latest 
@@ -19,5 +17,5 @@ RUN mkdir /config
 
 
 #COPY --from=build /usr/local /usr/local
-CMD /bin/bash
-#CMD /usr/local/bin/cncjs -H 0.0.0.0 -p 8000 -c /config/cncrc
+#CMD /bin/bash
+CMD /root/node_modules/cncjs/bin/cncjs -H 0.0.0.0 -p 8000 -c /config/cncrc
