@@ -9,16 +9,18 @@ services:
     # Add additional devices to this list if required.
     devices:
       - "/dev/ttyAMA0:/dev/ttyAMA0"
-      - "/dev/ttyUSB0:/dev/ttyACM0"
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
       - "/dev/i2c-1:/dev/i2c-1"
     cap_add:
       - SYS_RAWIO
       - SYS_RESOURCE
       - SYS_ADMIN
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
+
     volumes:
       - "cnc-config:/config"
+    network_mode: host 
 
   # mjpg-streamer:
   #   build: ./mjpg-streamer
