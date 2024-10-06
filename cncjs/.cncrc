@@ -1,0 +1,19 @@
+{
+    "state": {
+        "checkForUpdates": true,
+        "controller": {
+            "type": "TinyG",
+            "port": "/dev/ttyUSB0",
+            "baudrate": 115200,
+            "rtscts": false
+        }
+    },
+   "users": [
+    {
+      "id": "rpi",
+      "name": "rpi",
+      "password": "display",
+      "enabled": true
+    }
+  ]
+}
